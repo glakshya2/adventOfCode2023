@@ -37,7 +37,7 @@ int main(void) {
 		bool trackingNum = false;
 		string num = "";
 		int startX = 0;
-		for (int x = 0; x < line.size(); x++) {
+		for (int x = 0; x <= line.size(); x++) {
 			if (isdigit(line[x])) {
 				if (!trackingNum) {
 					trackingNum = true;
@@ -66,19 +66,19 @@ int main(void) {
 	}
 	for (int i = 0; i < numberList.size(); i++) {
 		string line = findLine("input.txt", numberList[i].startY);
-		if (numberList[i].startX > 0) {
+		if (numberList[i].startX >= 0) {
 			if (!iswalnum(line[numberList[i].startX - 1]) && line[numberList[i].startX - 1] != '.') {
 				numberList[i].adjacentX.push_back(numberList[i].startX - 1);
 				numberList[i].adjacentY.push_back(numberList[i].startY);
 			}
-			if (numberList[i].startY > 0) {
+			if (numberList[i].startY >= 0) {
 				string upperLine = findLine("input.txt", numberList[i].startY - 1);
 				if (!iswalnum(upperLine[numberList[i].startX - 1]) && upperLine[numberList[i].startX - 1] != '.') {
 					numberList[i].adjacentX.push_back(numberList[i].startX - 1);
 					numberList[i].adjacentY.push_back(numberList[i].startY - 1);
 				}
 			}
-			if (numberList[i].startY < 139) {
+			if (numberList[i].startY <= 140) {
 				string lowerLine = findLine("input.txt", numberList[i].startY + 1);
 				if (!iswalnum(lowerLine[numberList[i].startX - 1]) && lowerLine[numberList[i].startX - 1] != '.') {
 					numberList[i].adjacentX.push_back(numberList[i].startX - 1);
@@ -91,14 +91,14 @@ int main(void) {
 				numberList[i].adjacentX.push_back(numberList[i].endX + 1);
 				numberList[i].adjacentY.push_back(numberList[i].startY);
 			}
-			if (numberList[i].startY > 0) {
+			if (numberList[i].startY >= 0) {
 				string upperLine = findLine("input.txt", numberList[i].startY - 1);
 				if (!iswalnum(upperLine[numberList[i].endX + 1]) && upperLine[numberList[i].endX + 1] != '.') {
 					numberList[i].adjacentX.push_back(numberList[i].endX + 1);
 					numberList[i].adjacentY.push_back(numberList[i].startY - 1);
 				}
 			}
-			if (numberList[i].startY < 139) {
+			if (numberList[i].startY <= 140) {
 				string lowerLine = findLine("input.txt", numberList[i].startY + 1);
 				if (!iswalnum(lowerLine[numberList[i].endX + 1]) && lowerLine[numberList[i].endX + 1] != '.') {
 					numberList[i].adjacentX.push_back(numberList[i].endX +1);
@@ -107,14 +107,14 @@ int main(void) {
 			}
 		}
 		for (int j = 0; j < numberList[i].endX - numberList[i].startX + 1; j++) {
-			if (numberList[i].startY > 0) {
+			if (numberList[i].startY >= 0) {
 				string upperLine = findLine("input.txt", numberList[i].startY - 1);
 				if(!iswalnum(upperLine[numberList[i].startX + j]) && upperLine[numberList[i].startX + j] != '.') {
 					numberList[i].adjacentX.push_back(numberList[i].startX + j);
 					numberList[i].adjacentY.push_back(numberList[i].startY - 1);
 				} 
 			}
-			if (numberList[i].startY < 139) {
+			if (numberList[i].startY <= 140) {
 				string lowerLine = findLine("input.txt", numberList[i].startY + 1);
 				if(!iswalnum(lowerLine[numberList[i].startX + j]) && lowerLine[numberList[i].startX + j] != '.') {
 					numberList[i].adjacentX.push_back(numberList[i].startX + j);
@@ -130,6 +130,6 @@ int main(void) {
 			cout << i << "\t" << sum << "\t" << numberList[i].num << endl; 
 		}
 	}
-	cout << sum;
+	cout << "sum: " << sum << endl;
 	return 0;
 }
